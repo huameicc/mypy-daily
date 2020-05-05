@@ -1,3 +1,10 @@
+"""
+version jinja2 2.11.1
+
+"""
+
+
+
 from jinja2 import Environment, FileSystemLoader, Template
 
 import os
@@ -35,5 +42,46 @@ def test2():
 """ )
     print(temp.render(sitemap=[{'href': 'root', 'name': 'good', 'children': [{'href': 'pa', 'name': 'a'}, {'href': 'pb', 'name': 'b'}]}]))
 
-test1()
+
+def call_test():
+    temp = env.from_string(
+"""
+{% macro render_dialog(title, class='dialog') -%}
+    <div class="{{ class }}">
+        <h2>{{ title }}</h2>
+        <div class="contents">
+            {{ caller() }}
+        </div>
+    </div>
+{%- endmacro %}
+
+{% call render_dialog('Hello World') %}
+    This is a simple dialog rendered by using a macro and
+    a call block.
+{% endcall %}
+"""
+    )
+    print(temp.render())
+
+
+def join_test():
+    temp = env.from_string(
+"""
+{% set pipe = joiner("|") %}
+{% if categories %} {{ pipe() }}
+    Categories: {{ categories|join(", ") }}
+{% endif %}
+{% if author %} {{ pipe() }}
+    Author: {{ author() }}
+{% endif %}
+{% if can_edit %} {{ pipe() }}
+    <a href="?action=edit">Edit</a>
+{% endif %}
+"""
+    )
+    print(temp.render(categories=['A', 'B'], author=lambda : 'jack', can_edit=1))
+
+# test1()
 # test2()
+# call_test()
+join_test()
