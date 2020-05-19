@@ -1,0 +1,58 @@
+
+@font-face {
+    font-family: 'alex_brush';
+    src: url('fonts/alexbrush-regular-webfont.woff2') format('woff2'),
+         url('fonts/alexbrush-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'kaushan_script';
+    src: url('fonts/kaushanscript-regular-webfont.woff2') format('woff2'),
+         url('fonts/kaushanscript-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+/* General setup */
+
+html {
+  font-size: 10px;
+  /*margin: 0;*/
+  font-family: kaushan_script, sans-serif;
+}
+
+body {
+  width: 80%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Typography */
+
+h1 {
+  font-size: 4.2rem;
+}
+
+h2 {
+  font-size: 3.4rem;
+}
+
+h1, h2 {
+  font-family: alex_brush, cursive;
+  font-weight: bold;
+}
+
+p {
+  font-size: 1.8rem;
+  line-height: 1.6;
+  font-weight: 100;
+  word-spacing: 0.6rem;
+}
