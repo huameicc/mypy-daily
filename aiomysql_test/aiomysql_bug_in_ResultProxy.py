@@ -47,7 +47,9 @@ async def go(loop):
     engine = await create_engine(user='root', db='test',
                                  host='127.0.0.1', password='admin123', loop=loop)
     async with engine.acquire() as conn:
-        await conn.execute(tbl.insert().values(val='abc'))
+        # SAConnection本身没有commit，如果要提交更改到数据库，必须通过cursor实现，或者开始一个事务。
+        # trans = await conn.begin()
+        await conn.execute(tbl.insert().values(val='abc'))      # await得到ResultProxy（内部cursor的代理）
         await conn.execute(tbl.insert().values(val='xyz'))
 
         # 官方用例, 无法使用
@@ -64,6 +66,7 @@ async def go(loop):
         print(type(res))
         print(await res.fetchall())
         # ---------- 非原例代码，修改源码后测试 end --------------
+        # await trans.commit()
     engine.close()
     await engine.wait_closed()
 

@@ -5,7 +5,7 @@
 oneline_ifelse_to_andor.py
 oneline if-else can be replaced by and/or
 1. a if a else b  ->  a or b
-2. f if a else g  -> a and f or g
+2. f if a else g  -> a and f or g   # tricky though, so don't use, coz f must be true-like value.
 """
 
 def f():
