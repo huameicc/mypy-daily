@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8'>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+test vue.
+<div id='gg' v-bind:[msgRev()]="txt">
+  {{ msg }}
+  <div>{{ msgRev }}</div>
+
+  <div v-if="type === 'A'">
+    A
+  </div>
+  <div v-else-if="type === 'B'">
+    B
+  </div>
+  <div v-else-if="type === 'C'">
+    C
+  </div>
+  <div v-else>
+    Not A/B/C
+  </div>
+
+</div>
+
+<h1 key="head"> I'M H1</h1>
+
+
+<script>
+    let vm = new Vue({
+        el: '#gg',
+        data: {
+            msg: 'hello',
+            txt: 'value',
+            myattr: 'sent',
+            type: 'B'
+        },
+        computed: {
+            msgRev: function () {
+                return this.msg.split('').reverse().join('')
+            },
+            msgrev: function () {
+                return 'insensitive'
+            }
+        },
+        methods: {
+            msgrev: function () {
+                return 'func'
+            }
+        }
+    });
+
+</script>
+</body>
+</html>
