@@ -6,11 +6,22 @@
 </head>
 
 <body>
-test vue.
-<div id='gg' v-bind:[msgRev()]="txt">
-  {{ msg }}
+<h2>动态绑定键值必须小写，解析时按小写处理。即[msgRev]对应的是[msgrev]</h2>
+<div id='gg' v-bind:[msgRev()]="txt" :[myAttr]="type">
+  <input placeholder="gg" v-model="msg">
+  <div>{{msg}}</div>
   <div>{{ msgRev }}</div>
-
+  <hr>
+  <h3>计算属性computed，定义为方法，不需要加(), 会自动调用。相反，methods需要加上().<br>
+  计算属性与方法同名时，计算属性不生效，被方法覆盖。
+  </h3>
+  <div>{{ msgrev }}</div>
+  <div>{{ msgrev() }}</div>
+  <hr>
+  <div><button @click="count += 1">alert {{count}}</button></div>
+  <div><button @click="alert(2)">alert </button></div>
+  <div><button @click="saygood('good')">methods saygood</button></div>
+  <h3>v-if v-else-if v-else</h3>
   <div v-if="type === 'A'">
     A
   </div>
@@ -23,20 +34,24 @@ test vue.
   <div v-else>
     Not A/B/C
   </div>
-
 </div>
-
+<hr>
 <h1 key="head"> I'M H1</h1>
 
 
 <script>
+    function sayhi(msg) {
+        alert(msg)
+    }
+
     let vm = new Vue({
         el: '#gg',
         data: {
             msg: 'hello',
             txt: 'value',
             myattr: 'sent',
-            type: 'B'
+            type: 'B',
+            count: 0
         },
         computed: {
             msgRev: function () {
@@ -48,7 +63,10 @@ test vue.
         },
         methods: {
             msgrev: function () {
-                return 'func'
+                return 'dynamic-attr'
+            },
+            saygood: function (msg) {
+                alert(msg);
             }
         }
     });
