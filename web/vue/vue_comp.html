@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="components-demo">
+  <p>hello</p>
+  <button-counter :prp="outer"></button-counter>
+  <ul>
+    <li v-for="i in liget()">{{ i }}</li>
+  </ul>
+</div>
+</body>
+
+<script>
+  function foo() {
+      return 'FOO'
+  }
+
+Vue.component('button-counter', {
+    props: ['prp'],
+    data: function () {
+        return {
+            count: 0
+        }
+    },
+    template: '<div><button v-on:click="count++" proxy="foo()">You clicked me {{ count }} times. </button>' +
+        '<p>proxy: {{ fooproxy() }}.<br> innerfoo: {{ foo("inner") }} ,<br> outer: {{ foo(prp) }}</p></div>',
+    methods: {
+        fooproxy: foo,
+        foo: function (msg) {
+            return 'template method: ' + msg;
+        }
+    }
+});
+new Vue({ el: '#components-demo',
+    data: {
+        outer: 'outer-data'
+    },
+    methods: {
+        liget : function () {
+            return [2, 5, 8]
+        }
+    }
+});
+</script>
+</html>
