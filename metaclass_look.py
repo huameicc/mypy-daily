@@ -89,3 +89,11 @@ class B(MyList, metaclass=type):
 
 print(B.pr)
 print(B().pr)
+for i in range(0, 0o777+2):
+    s = '\\u%04x' % i
+    a = 0
+    exec('a=\'%s\'' % s)
+    if len(a) != 1:
+        print(i, a)
+    else:
+        print(a, sep='', end=(i+1) % 16 == 0 and '\n' or '')
